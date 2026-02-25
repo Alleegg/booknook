@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookNook - Каталог</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="logo">BookNook</a>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html" class="active">Каталог</a></li>
+                    <li><a href="cart.html">Корзина</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle">Темная тема</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="catalog">
+            <h1>Каталог книг</h1>
+            
+            <div class="catalog-controls">
+                <div class="filter-section">
+                    <h3>Фильтр по жанру:</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Все</button>
+                        <button class="filter-btn" data-filter="fantasy">Фэнтези</button>
+                        <button class="filter-btn" data-filter="science">Наука</button>
+                        <button class="filter-btn" data-filter="fiction">Художественная</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="books-grid" id="booksGrid">
+                <!--добавлены книги js-->
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
