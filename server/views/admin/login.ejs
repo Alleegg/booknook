@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('../partials/nav') %>
+  <main>
+    <%- include('../partials/flash') %>
+    <section class="admin-login">
+      <h1>Вход администратора</h1>
+      <form method="post" action="/admin/login" class="admin-form">
+        <div class="form-group">
+          <label for="password">Пароль</label>
+          <input type="password" id="password" name="password" required maxlength="200" autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary">Войти</button>
+      </form>
+      <p class="admin-hint">Пароль задаётся переменной окружения ADMIN_PASSWORD.</p>
+    </section>
+  </main>
+  <footer><a href="/">На главную</a></footer>
+  <script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <main>
+    <%- include('partials/flash') %>
+    <section class="catalog">
+      <h1>Каталог книг</h1>
+
+      <div class="catalog-controls">
+        <div class="filter-section">
+          <h3>Фильтр по жанру:</h3>
+          <div class="filter-buttons">
+            <a href="/catalog?genre=all" class="filter-btn <%= currentGenre === 'all' ? 'active' : '' %>">Все</a>
+            <a href="/catalog?genre=fantasy" class="filter-btn <%= currentGenre === 'fantasy' ? 'active' : '' %>">Фэнтези</a>
+            <a href="/catalog?genre=science" class="filter-btn <%= currentGenre === 'science' ? 'active' : '' %>">Наука</a>
+            <a href="/catalog?genre=fiction" class="filter-btn <%= currentGenre === 'fiction' ? 'active' : '' %>">Художественная</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="books-grid">
+        <% books.forEach(function (book) { %>
+          <article class="book-card">
+            <h3><%= book.title %></h3>
+            <p class="author"><%= book.author %></p>
+            <p class="genre-tag"><%= book.genre_name %></p>
+            <p class="price"><%= book.price %> ₽</p>
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="book_id" value="<%= book.id %>">
+              <input type="hidden" name="quantity" value="1">
+              <button type="submit" class="add-to-cart">Добавить в корзину</button>
+            </form>
+          </article>
+        <% }); %>
+      </div>
+    </section>
+  </main>
+  <footer></footer>
+  <script src="/script.js"></script>
+</body>
+</html>

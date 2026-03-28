@@ -522,3 +522,148 @@ footer {
     background-color: var(--secondary-color);
     margin-top: auto;
 }
+
+footer a {
+    color: var(--primary-color);
+}
+
+a.filter-btn {
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.genre-tag {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    margin-bottom: 0.5rem;
+}
+
+.flash {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.flash-success {
+    background-color: rgba(39, 174, 96, 0.12);
+    color: #1e8449;
+    border: 1px solid rgba(39, 174, 96, 0.35);
+}
+
+.flash-error {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #c0392b;
+    border: 1px solid rgba(231, 76, 60, 0.35);
+}
+
+.checkout-block {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    max-width: 520px;
+}
+
+.checkout-form {
+    margin-top: 1rem;
+}
+
+.cart-item {
+    grid-template-columns: 1fr auto auto auto;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.admin-section,
+.admin-login {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.admin-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-form {
+    max-width: 420px;
+    margin-top: 1rem;
+}
+
+.admin-form.wide {
+    max-width: 560px;
+}
+
+.admin-form select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.admin-hint {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    opacity: 0.75;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: middle;
+}
+
+.admin-table th {
+    background-color: var(--secondary-color);
+}
+
+.admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.inline-form button {
+    margin: 0;
+}
+
+.btn-sm {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger:hover {
+    opacity: 0.9;
+}
