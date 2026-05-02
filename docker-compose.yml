@@ -9,26 +9,77 @@ services:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - booknook_pgdata:/var/lib/postgresql/data
-      - ./server/migrations/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U booknook -d booknook"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-booknook} -d ${POSTGRES_DB:-booknook}"]
       interval: 3s
       timeout: 5s
       retries: 10
 
-  web:
-    build: .
-    ports:
-      - "${APP_PORT:-3000}:3000"
+  legacy-db-init:
+    image: postgres:16-alpine
+    profiles: ["legacy"]
+    depends_on:
+      db:
+        condition: service_healthy
     environment:
-      DATABASE_URL: ${DATABASE_URL:-postgres://booknook:booknook@db:5432/booknook}
-      SESSION_SECRET: ${SESSION_SECRET:-change-me-in-production}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-booknook}
+    volumes:
+      - ./server/migrations/init.sql:/sql/init.sql:ro
+    command: >
+      sh -c "psql -h db -U ${POSTGRES_USER:-booknook} -d ${POSTGRES_DB:-booknook}
+      -v ON_ERROR_STOP=0
+      -f /sql/init.sql || true"
+    restart: "no"
+
+  legacy-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    profiles: ["legacy"]
+    ports:
+      - "${LEGACY_PORT:-3000}:3000"
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-booknook}:${POSTGRES_PASSWORD:-booknook}@db:5432/${POSTGRES_DB:-booknook}
+      SESSION_SECRET: ${SESSION_SECRET:-dev-secret}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin}
       NODE_ENV: ${NODE_ENV:-production}
       PORT: "3000"
     depends_on:
       db:
         condition: service_healthy
+      legacy-db-init:
+        condition: service_completed_successfully
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "${BACKEND_PORT:-4000}:4000"
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-booknook}:${POSTGRES_PASSWORD:-booknook}@db:5432/${POSTGRES_DB:-booknook}?schema=lab3
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-1d}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:5173}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@booknook.local}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin12345}
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: "4000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: sh -c "npm run db:migrate && npm run db:seed-admin && npm start"
+    profiles: ["modern"]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "${FRONTEND_PORT:-5173}:80"
+    depends_on:
+      - backend
+    profiles: ["modern"]
 
 volumes:
   booknook_pgdata:

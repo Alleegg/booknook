@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f4f8;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.card,
+form {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0.55rem;
+}
+
+button {
+  border: none;
+  background: #3059d8;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+}
+
+.error {
+  color: #a11;
+  font-weight: 600;
+}

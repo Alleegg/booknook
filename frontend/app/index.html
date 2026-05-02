@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookNook SPA</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Arial, sans-serif; background: #f2f4f8; }
+      .container { max-width: 900px; margin: 0 auto; padding: 1rem; }
+      .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .card, form { background: #fff; border-radius: 8px; padding: 1rem; }
+      input { width: 100%; display: block; margin-bottom: 0.7rem; padding: 0.55rem; }
+      button { border: 0; background: #3059d8; color: #fff; border-radius: 6px; padding: 0.55rem 0.8rem; cursor: pointer; }
+      .error { color: #a11; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="/main.js"></script>
+  </body>
+</html>
